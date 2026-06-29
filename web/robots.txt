@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /privacy
+Allow: /terms
+Allow: /delete-account
+Allow: /support
+
+Disallow: /assets/
+Disallow: /canvaskit/
+
+Sitemap: https://ciervo.app/sitemap.xml
