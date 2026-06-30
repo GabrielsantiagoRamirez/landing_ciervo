@@ -3,7 +3,7 @@ abstract final class ContentConstants {
   static const String heroTitle =
       'Descubre, reserva, compra y disfruta desde una sola aplicación.';
   static const String heroSubtitle =
-      'CIERVO conecta personas, negocios y experiencias en una única plataforma. Descubre restaurantes, hoteles, eventos, promociones, domicilios y mucho más, todo desde una experiencia moderna, rápida y segura.';
+      'Ciervo Club conecta personas, negocios y experiencias en una única plataforma. Descubre restaurantes, hoteles, eventos, promociones, domicilios y mucho más, todo desde una experiencia moderna, rápida y segura.';
   static const String heroPrimaryCta = 'Descargar la App';
   static const String heroSecondaryCta = 'Explorar funcionalidades';
 
@@ -18,7 +18,7 @@ abstract final class ContentConstants {
   // About
   static const String aboutTitle = 'Todo lo que necesitas en un solo lugar.';
   static const String aboutDescription =
-      'CIERVO reúne múltiples servicios en una única plataforma para facilitar la forma en que descubres, reservas, compras y administras tus experiencias. Desde un restaurante hasta un evento o un domicilio, todo puede gestionarse desde la misma aplicación.';
+      'Ciervo Club reúne múltiples servicios en una única plataforma para facilitar la forma en que descubres, reservas, compras y administras tus experiencias. Desde un restaurante hasta un evento o un domicilio, todo puede gestionarse desde la misma aplicación.';
 
   // Features grid
   static const String featuresSectionTitle = 'Funcionalidades';
@@ -81,9 +81,9 @@ abstract final class ContentConstants {
       'Solicita una asesoría para planes empresariales.';
   static const String registerBusinessButton = 'Registrar negocio';
   static const String registerBusinessSubtitle =
-      'Únete a CIERVO y lleva tu negocio a más clientes.';
+      'Únete a Ciervo Club y lleva tu negocio a más clientes.';
   static const String appComingSoonMessage =
-      'La app estará disponible próximamente.';
+      'La aplicación estará disponible próximamente en Google Play y App Store.';
   static const String socialComingSoonMessage =
       'Este enlace estará disponible próximamente.';
 
@@ -141,7 +141,7 @@ abstract final class ContentConstants {
   // Security
   static const String securityTitle = 'Tu información protegida en todo momento.';
   static const String securityDescription =
-      'CIERVO utiliza conexiones seguras y proveedores de pago confiables para proteger tu información y tus transacciones. Los pagos son gestionados mediante plataformas especializadas como Mercado Pago, según el país disponible.';
+      'Ciervo Club utiliza conexiones seguras y proveedores de pago confiables para proteger tu información y tus transacciones. Los pagos son gestionados mediante plataformas especializadas como Mercado Pago, según el país disponible.';
 
   // Business benefits
   static const String businessBenefitsTitle = 'Beneficios para Negocios';
@@ -160,9 +160,9 @@ abstract final class ContentConstants {
   static const String faqTitle = 'Preguntas Frecuentes';
   static const List<FaqItem> faqItems = [
     FaqItem(
-      question: '¿Qué es CIERVO?',
+      question: '¿Qué es Ciervo Club?',
       answer:
-          'Es una plataforma que conecta usuarios con negocios y servicios desde una única aplicación.',
+          'Es una plataforma que conecta usuarios con negocios y servicios desde una única aplicación. Puedes descubrir lugares, reservar, comprar entradas, pedir domicilios y más.',
     ),
     FaqItem(
       question: '¿Cómo descargo la aplicación?',
@@ -195,8 +195,8 @@ abstract final class ContentConstants {
   ];
 
   // Download
-  static const String downloadTitle = 'Descarga CIERVO';
-  static const String comingSoon = 'Próximamente';
+  static const String downloadTitle = 'Descarga Ciervo Club';
+  static const String comingSoon = 'Disponible próximamente';
 
   // Contact
   static const String contactTitle = 'Contacto';
@@ -211,8 +211,7 @@ abstract final class ContentConstants {
 
   // Footer
   static const String footerDescription =
-      'CIERVO conecta personas, negocios y experiencias en una única plataforma moderna, rápida y segura.';
-  static const String copyright = '© 2026 CIERVO. Todos los derechos reservados.';
+      'Ciervo Club conecta personas, negocios y experiencias en una única plataforma moderna, rápida y segura.';
 
   // Navbar
   static const List<NavItem> navItems = [

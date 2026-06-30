@@ -1,5 +1,7 @@
 abstract final class UrlConstants {
+  /// Completar cuando la app esté en Google Play.
   static const String googlePlayUrl = '';
+  /// Completar cuando la app esté en App Store.
   static const String appStoreUrl = '';
   static const String businessPanelUrl = '';
   static const String contactEmail = 'contacto@ciervo.app';

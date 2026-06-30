@@ -25,62 +25,68 @@ class DownloadBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final isGoogle = store == DownloadStore.googlePlay;
     final published = AppConstants.appsPublished;
+    final storeLabel = isGoogle ? 'Google Play' : 'App Store';
 
-    return Tooltip(
-      message: published
-          ? (isGoogle ? 'Google Play' : 'App Store')
-          : ContentConstants.comingSoon,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: onTap ?? () => LandingActions.openStore(context, store),
-          child: AnimatedOpacity(
-            opacity: published ? 1.0 : 0.65,
-            duration: const Duration(milliseconds: 200),
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md,
-                vertical: AppSpacing.sm,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.carbonBlack,
-                borderRadius: BorderRadius.circular(AppRadius.button),
-                border: Border.all(color: AppColors.divider),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  FaIcon(
-                    isGoogle
-                        ? FontAwesomeIcons.googlePlay
-                        : FontAwesomeIcons.appStore,
-                    color: AppColors.textPrimary,
-                    size: 24,
-                  ),
-                  const SizedBox(width: AppSpacing.sm),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        published
-                            ? 'Disponible en'
-                            : ContentConstants.comingSoon,
-                        style: AppTypography.caption(context).copyWith(
-                          fontSize: 10,
-                          color: AppColors.textDisabled,
+    return Semantics(
+      label: published
+          ? 'Descargar en $storeLabel'
+          : '$storeLabel — ${ContentConstants.comingSoon}',
+      button: true,
+      child: Tooltip(
+        message: published ? storeLabel : ContentConstants.comingSoon,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: onTap ?? () => LandingActions.openStore(context, store),
+            child: AnimatedOpacity(
+              opacity: published ? 1.0 : 0.65,
+              duration: const Duration(milliseconds: 200),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.sm,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.carbonBlack,
+                  borderRadius: BorderRadius.circular(AppRadius.button),
+                  border: Border.all(color: AppColors.divider),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FaIcon(
+                      isGoogle
+                          ? FontAwesomeIcons.googlePlay
+                          : FontAwesomeIcons.appStore,
+                      color: AppColors.textPrimary,
+                      size: 24,
+                      semanticLabel: storeLabel,
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          published
+                              ? 'Disponible en'
+                              : ContentConstants.comingSoon,
+                          style: AppTypography.caption(context).copyWith(
+                            fontSize: 10,
+                            color: AppColors.textDisabled,
+                          ),
                         ),
-                      ),
-                      Text(
-                        isGoogle ? 'Google Play' : 'App Store',
-                        style: AppTypography.button(context).copyWith(
-                          color: AppColors.textPrimary,
-                          fontSize: 14,
+                        Text(
+                          storeLabel,
+                          style: AppTypography.button(context).copyWith(
+                            color: AppColors.textPrimary,
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -5,6 +5,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_radius.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
+import '../widgets/ciervo_bullet_icon.dart';
 import '../buttons/primary_button.dart';
 
 class MembershipCard extends StatefulWidget {
@@ -68,8 +69,7 @@ class _MembershipCardState extends State<MembershipCard> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.check_circle_outline,
-                        color: AppColors.gold, size: 18),
+                    const CiervoBulletIcon(size: 20),
                     const SizedBox(width: AppSpacing.xs),
                     Expanded(
                       child: Text(b, style: AppTypography.bodySmall(context)),

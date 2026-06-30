@@ -1,13 +1,13 @@
 {
-    "name": "CIERVO",
-    "short_name": "CIERVO",
+    "name": "Ciervo Club",
+    "short_name": "Ciervo Club",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0B0B0B",
     "theme_color": "#0B0B0B",
-    "description": "CIERVO conecta usuarios y negocios en una única plataforma para descubrir, reservar, comprar y disfrutar experiencias.",
+    "description": "Ciervo Club conecta usuarios y negocios en una única plataforma para descubrir, reservar, comprar y disfrutar experiencias en Colombia.",
     "orientation": "any",
-    "lang": "es",
+    "lang": "es-CO",
     "prefer_related_applications": true,
     "icons": [
         {

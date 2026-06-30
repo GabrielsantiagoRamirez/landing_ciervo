@@ -5,6 +5,7 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/content_constants.dart';
 import '../../../core/constants/url_constants.dart';
 import '../../../core/models/contact_intent.dart';
+import '../../../core/services/contact_form_service.dart';
 import '../../../core/services/landing_actions.dart';
 import '../../../core/theme/app_breakpoints.dart';
 import '../../../core/theme/app_colors.dart';
@@ -14,6 +15,7 @@ import '../../../shared/buttons/primary_button.dart';
 import '../../../shared/buttons/social_button.dart';
 import '../../../shared/layout/animated_section.dart';
 import '../../../shared/layout/responsive_container.dart';
+import '../../../shared/widgets/email_link.dart';
 import '../../../shared/widgets/section_title.dart';
 
 class ContactSection extends StatefulWidget {
@@ -34,6 +36,7 @@ class _ContactSectionState extends State<ContactSection> {
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
   bool _sent = false;
+  bool _sending = false;
 
   @override
   void initState() {
@@ -62,12 +65,31 @@ class _ContactSectionState extends State<ContactSection> {
     super.dispose();
   }
 
-  void _submit() {
-    if (_formKey.currentState?.validate() ?? false) {
+  Future<void> _submit() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    setState(() => _sending = true);
+
+    final sent = await ContactFormService.sendContactRequest(
+      name: _nameController.text.trim(),
+      email: _emailController.text.trim(),
+      message: _messageController.text.trim(),
+    );
+
+    if (!mounted) return;
+
+    setState(() => _sending = false);
+
+    if (sent) {
       setState(() => _sent = true);
       LandingActions.showSnackBar(
         context,
         ContentConstants.contactSuccess,
+      );
+    } else {
+      LandingActions.showSnackBar(
+        context,
+        'No se pudo abrir el cliente de correo. Escribe a ${AppConstants.contactEmail}.',
       );
     }
   }
@@ -178,7 +200,8 @@ class _ContactSectionState extends State<ContactSection> {
           const SizedBox(height: AppSpacing.lg),
           PrimaryButton(
             label: ContentConstants.contactSend,
-            onPressed: _submit,
+            onPressed: _sending ? null : _submit,
+            isLoading: _sending,
             isExpanded: true,
           ),
         ],
@@ -192,12 +215,9 @@ class _ContactSectionState extends State<ContactSection> {
       children: [
         Text('Soporte', style: AppTypography.subtitle(context)),
         const SizedBox(height: AppSpacing.sm),
-        InkWell(
-          onTap: () => LandingActions.openSupportEmail(context),
-          child: Text(
-            AppConstants.supportEmail,
-            style: AppTypography.body(context).copyWith(color: AppColors.gold),
-          ),
+        EmailLink(
+          email: AppConstants.supportEmail,
+          style: AppTypography.body(context).copyWith(color: AppColors.gold),
         ),
         const SizedBox(height: AppSpacing.sm),
         TextButton(
@@ -210,12 +230,9 @@ class _ContactSectionState extends State<ContactSection> {
         const SizedBox(height: AppSpacing.lg),
         Text('Contacto', style: AppTypography.subtitle(context)),
         const SizedBox(height: AppSpacing.sm),
-        InkWell(
-          onTap: () => LandingActions.openContactEmail(context),
-          child: Text(
-            UrlConstants.contactEmail,
-            style: AppTypography.body(context).copyWith(color: AppColors.gold),
-          ),
+        EmailLink(
+          email: UrlConstants.contactEmail,
+          style: AppTypography.body(context).copyWith(color: AppColors.gold),
         ),
         const SizedBox(height: AppSpacing.lg),
         Text('WhatsApp', style: AppTypography.subtitle(context)),

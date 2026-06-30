@@ -9,7 +9,7 @@ class PhoneMockup extends StatelessWidget {
   const PhoneMockup({
     super.key,
     this.imagePath,
-    this.label = 'CIERVO App',
+    this.label = 'Ciervo Club',
   });
 
   final String? imagePath;

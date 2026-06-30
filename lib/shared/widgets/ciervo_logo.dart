@@ -40,7 +40,7 @@ class _CiervoLogoState extends State<CiervoLogo> {
         height: _height,
         fit: BoxFit.contain,
         filterQuality: FilterQuality.high,
-        semanticLabel: AppConstants.appName,
+        semanticLabel: '${AppConstants.logoName}, logotipo de ${AppConstants.brandName}',
         errorBuilder: (context, error, stackTrace) => _fallback(context),
       ),
     );
@@ -59,14 +59,14 @@ class _CiervoLogoState extends State<CiervoLogo> {
           );
 
     return Tooltip(
-      message: widget.tooltip ?? AppConstants.appName,
+      message: widget.tooltip ?? '${AppConstants.logoName}, ${AppConstants.brandName}',
       child: child,
     );
   }
 
   Widget _fallback(BuildContext context) {
     return Text(
-      AppConstants.appName,
+      AppConstants.logoName,
       style: TextStyle(
         fontSize: _height * 0.35,
         fontWeight: FontWeight.w700,

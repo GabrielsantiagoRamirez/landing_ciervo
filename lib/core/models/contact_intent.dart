@@ -15,15 +15,15 @@ class ContactIntent {
 
   factory ContactIntent.business() => const ContactIntent(
         type: ContactIntentType.business,
-        subject: 'Registro de negocio - CIERVO',
+        subject: 'Registro de negocio - Ciervo Club',
         message:
-            'Hola, me interesa registrar mi negocio en CIERVO.\n\nNombre del negocio:\nCiudad:\nTipo de negocio:\n',
+            'Hola, me interesa registrar mi negocio en Ciervo Club.\n\nNombre del negocio:\nCiudad:\nTipo de negocio:\n',
         highlightText: 'Completa el formulario para registrar tu negocio.',
       );
 
   factory ContactIntent.enterprise() => const ContactIntent(
         type: ContactIntentType.enterprise,
-        subject: 'Planes empresariales - CIERVO',
+        subject: 'Planes empresariales - Ciervo Club',
         message:
             'Hola, solicito una asesoría para planes empresariales.\n\nEmpresa:\nNúmero de empleados:\nCiudad:\n',
         highlightText:

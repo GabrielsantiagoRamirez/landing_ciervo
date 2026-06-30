@@ -49,17 +49,21 @@ class _FooterLinkState extends State<FooterLink> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-        child: InkWell(
-          onTap: widget.onTap,
-          child: Text(
-            widget.label,
-            style: AppTypography.bodySmall(context).copyWith(
-              color: _hovered ? AppColors.gold : AppColors.textSecondary,
+    return Semantics(
+      label: widget.label,
+      button: true,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+          child: InkWell(
+            onTap: widget.onTap,
+            child: Text(
+              widget.label,
+              style: AppTypography.bodySmall(context).copyWith(
+                color: _hovered ? AppColors.gold : AppColors.textSecondary,
+              ),
             ),
           ),
         ),

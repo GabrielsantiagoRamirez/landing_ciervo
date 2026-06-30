@@ -1,22 +1,30 @@
 abstract final class SeoConstants {
+  static const String brand = 'Ciervo Club';
+
   static const String homeTitle =
-      'CIERVO | Descubre negocios, eventos, reservas y más.';
+      'Ciervo Club | Descubre negocios, eventos, reservas y más';
   static const String homeDescription =
-      'CIERVO conecta usuarios y negocios en una única plataforma para descubrir, reservar, comprar y disfrutar experiencias.';
-  static const String privacyTitle = 'Política de Privacidad | CIERVO';
+      'Ciervo Club conecta usuarios y negocios en una única plataforma para descubrir, reservar, comprar y disfrutar experiencias en Colombia.';
+
+  static const String privacyTitle = 'Política de Privacidad | Ciervo Club';
   static const String privacyDescription =
-      'Conoce cómo CIERVO recopila, utiliza y protege tu información personal.';
-  static const String termsTitle = 'Términos y Condiciones | CIERVO';
+      'Conoce cómo Ciervo Club recopila, utiliza y protege tu información personal en la aplicación y la landing.';
+
+  static const String termsTitle = 'Términos y Condiciones | Ciervo Club';
   static const String termsDescription =
-      'Lee los términos y condiciones de uso de la plataforma CIERVO.';
-  static const String deleteAccountTitle = 'Eliminar Cuenta | CIERVO';
+      'Lee los términos y condiciones de uso de la plataforma Ciervo Club.';
+
+  static const String deleteAccountTitle = 'Eliminar Cuenta | Ciervo Club';
   static const String deleteAccountDescription =
-      'Solicita la eliminación de tu cuenta de CIERVO y conoce el proceso.';
-  static const String supportTitle = 'Soporte | CIERVO';
+      'Solicita la eliminación de tu cuenta de Ciervo Club y conoce qué datos se eliminan o conservan.';
+
+  static const String supportTitle = 'Soporte | Ciervo Club';
   static const String supportDescription =
-      'Obtén ayuda y soporte para la plataforma CIERVO.';
-  static const String notFoundTitle = 'Página no encontrada | CIERVO';
+      'Obtén ayuda y soporte para la aplicación y plataforma Ciervo Club.';
+
+  static const String notFoundTitle = 'Página no encontrada | Ciervo Club';
   static const String notFoundDescription =
-      'La página que buscas no existe en CIERVO.';
+      'La página que buscas no existe en Ciervo Club.';
+
   static const String ogImage = 'https://ciervo.app/og-image.png';
 }

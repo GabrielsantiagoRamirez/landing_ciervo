@@ -71,7 +71,7 @@ abstract final class LandingActions {
     await _launchExternalUrl(url);
   }
 
-  static Future<void> openEmail({
+  static Future<bool> openEmail({
     required String email,
     String? subject,
     String? body,
@@ -79,22 +79,49 @@ abstract final class LandingActions {
     final uri = Uri(
       scheme: 'mailto',
       path: email,
-      queryParameters: {
-        if (subject != null && subject.isNotEmpty) 'subject': subject,
-        if (body != null && body.isNotEmpty) 'body': body,
-      },
+      query: _encodeMailtoQuery(subject: subject, body: body),
     );
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+    try {
+      if (await canLaunchUrl(uri)) {
+        return await launchUrl(uri);
+      }
+      return false;
+    } catch (_) {
+      return false;
     }
   }
 
-  static Future<void> openContactEmail(BuildContext context) async {
-    await openEmail(email: UrlConstants.contactEmail);
+  static String? _encodeMailtoQuery({String? subject, String? body}) {
+    final parts = <String>[];
+    if (subject != null && subject.isNotEmpty) {
+      parts.add('subject=${Uri.encodeComponent(subject)}');
+    }
+    if (body != null && body.isNotEmpty) {
+      parts.add('body=${Uri.encodeComponent(body)}');
+    }
+    return parts.isEmpty ? null : parts.join('&');
   }
 
-  static Future<void> openSupportEmail(BuildContext context) async {
-    await openEmail(email: AppConstants.supportEmail);
+  static Future<bool> openContactEmail(BuildContext context) async {
+    final sent = await openEmail(email: UrlConstants.contactEmail);
+    if (!sent && context.mounted) {
+      showSnackBar(
+        context,
+        'No se pudo abrir el cliente de correo. Escribe a ${UrlConstants.contactEmail}.',
+      );
+    }
+    return sent;
+  }
+
+  static Future<bool> openSupportEmail(BuildContext context) async {
+    final sent = await openEmail(email: AppConstants.supportEmail);
+    if (!sent && context.mounted) {
+      showSnackBar(
+        context,
+        'No se pudo abrir el cliente de correo. Escribe a ${AppConstants.supportEmail}.',
+      );
+    }
+    return sent;
   }
 
   static Future<void> openWhatsapp(BuildContext context) async {

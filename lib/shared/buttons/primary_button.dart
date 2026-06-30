@@ -77,9 +77,14 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         ? SizedBox(width: double.infinity, child: button)
         : button;
 
-    return Tooltip(
-      message: widget.tooltip ?? widget.label,
-      child: child,
+    return Semantics(
+      button: true,
+      label: widget.label,
+      enabled: enabled,
+      child: Tooltip(
+        message: widget.tooltip ?? widget.label,
+        child: child,
+      ),
     );
   }
 }

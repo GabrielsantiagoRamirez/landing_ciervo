@@ -76,7 +76,10 @@ class LegalPageLayout extends StatelessWidget {
                       ),
                     ),
                   const SizedBox(height: AppSpacing.lg),
-                  Text(title, style: AppTypography.sectionTitle(context)),
+                  Semantics(
+                    header: true,
+                    child: Text(title, style: AppTypography.sectionTitle(context)),
+                  ),
                   const SizedBox(height: AppSpacing.xl),
                   ...children,
                 ],
