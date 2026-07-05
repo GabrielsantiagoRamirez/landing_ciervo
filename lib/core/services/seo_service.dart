@@ -40,6 +40,12 @@ abstract final class SeoService {
         canonical: '/delete-account',
       );
 
+  static void updateDataRequest() => updatePageMeta(
+        title: SeoConstants.dataRequestTitle,
+        description: SeoConstants.dataRequestDescription,
+        canonical: '/data-request',
+      );
+
   static void updateSupport() => updatePageMeta(
         title: SeoConstants.supportTitle,
         description: SeoConstants.supportDescription,

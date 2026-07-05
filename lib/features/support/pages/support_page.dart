@@ -16,7 +16,6 @@ import '../../../shared/buttons/social_button.dart';
 import '../../../shared/layout/legal_page_layout.dart';
 import '../../../shared/widgets/email_link.dart';
 import '../../../shared/widgets/faq_item.dart';
-import '../../../shared/widgets/legal_internal_links.dart';
 
 class SupportPage extends StatefulWidget {
   const SupportPage({super.key});
@@ -243,7 +242,6 @@ class _SupportPageState extends State<SupportPage> {
           onPressed: () => context.go(UrlConstants.deleteAccount),
           child: const Text('Ir a Eliminar Cuenta'),
         ),
-        const LegalInternalLinks(),
       ],
     );
   }

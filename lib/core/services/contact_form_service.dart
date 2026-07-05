@@ -29,13 +29,58 @@ abstract final class ContactFormService {
   }
 
   static Future<bool> sendDeleteAccountRequest({
+    required String name,
     required String email,
+    String? ciervoId,
+    String? reason,
   }) {
+    final idLine = ciervoId != null && ciervoId.isNotEmpty
+        ? 'ID Ciervo: $ciervoId\n'
+        : '';
+    final reasonLine = reason != null && reason.isNotEmpty
+        ? 'Motivo: $reason\n'
+        : '';
+
     return LandingActions.openEmail(
-      email: AppConstants.supportEmail,
+      email: AppConstants.dataSafetyEmail,
       subject: 'Solicitud de eliminación de cuenta — ${AppConstants.brandName}',
       body:
-          'Solicito la eliminación completa de mi cuenta de ${AppConstants.brandName}.\n\nCorreo de la cuenta: $email\n\nConfirmo que entiendo que algunos datos pueden conservarse por obligación legal según la política de privacidad.\n\n---\nEnviado desde ${AppConstants.siteUrl}/delete-account',
+          'Solicito la eliminación permanente de mi cuenta de ${AppConstants.brandName}.\n\n'
+          'Nombre: $name\n'
+          'Correo de la cuenta: $email\n'
+          '$idLine'
+          '$reasonLine'
+          'Confirmo que entiendo que este proceso puede ser irreversible y que algunos datos pueden conservarse por obligación legal según la política de privacidad.\n\n'
+          '---\n'
+          'Enviado desde ${AppConstants.siteUrl}/delete-account',
+    );
+  }
+
+  static Future<bool> sendDataRequest({
+    required String name,
+    required String email,
+    required String requestType,
+    String? ciervoId,
+    String? details,
+  }) {
+    final idLine = ciervoId != null && ciervoId.isNotEmpty
+        ? 'ID Ciervo: $ciervoId\n'
+        : '';
+    final detailsLine = details != null && details.isNotEmpty
+        ? 'Detalles adicionales:\n$details\n'
+        : '';
+
+    return LandingActions.openEmail(
+      email: AppConstants.dataSafetyEmail,
+      subject: 'Solicitud de datos personales — ${AppConstants.brandName}',
+      body:
+          'Tipo de solicitud: $requestType\n\n'
+          'Nombre: $name\n'
+          'Correo de la cuenta: $email\n'
+          '$idLine'
+          '$detailsLine'
+          '---\n'
+          'Enviado desde ${AppConstants.siteUrl}/data-request',
     );
   }
 }

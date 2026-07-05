@@ -173,6 +173,10 @@ class FooterSection extends StatelessWidget {
             label: 'Eliminar Cuenta',
             onTap: () => context.go(UrlConstants.deleteAccount),
           ),
+          FooterLink(
+            label: 'Solicitud de Datos',
+            onTap: () => context.go(UrlConstants.dataRequest),
+          ),
         ],
       ),
       FooterColumn(

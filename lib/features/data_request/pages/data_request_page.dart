@@ -12,27 +12,38 @@ import '../../../core/theme/app_typography.dart';
 import '../../../shared/buttons/primary_button.dart';
 import '../../../shared/layout/legal_page_layout.dart';
 
-class DeleteAccountPage extends StatefulWidget {
-  const DeleteAccountPage({super.key});
+enum DataRequestType {
+  copy('Copia de datos personales'),
+  correction('Corrección de información'),
+  partialDeletion('Eliminación parcial de datos'),
+  fullDeletion('Eliminación completa de la cuenta');
 
-  @override
-  State<DeleteAccountPage> createState() => _DeleteAccountPageState();
+  const DataRequestType(this.label);
+
+  final String label;
 }
 
-class _DeleteAccountPageState extends State<DeleteAccountPage> {
+class DataRequestPage extends StatefulWidget {
+  const DataRequestPage({super.key});
+
+  @override
+  State<DataRequestPage> createState() => _DataRequestPageState();
+}
+
+class _DataRequestPageState extends State<DataRequestPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _ciervoIdController = TextEditingController();
-  final _reasonController = TextEditingController();
-  bool _confirmed = false;
+  final _detailsController = TextEditingController();
+  DataRequestType _requestType = DataRequestType.copy;
   bool _submitted = false;
   bool _submitting = false;
 
   @override
   void initState() {
     super.initState();
-    SeoService.updateDeleteAccount();
+    SeoService.updateDataRequest();
   }
 
   @override
@@ -40,27 +51,21 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
     _nameController.dispose();
     _emailController.dispose();
     _ciervoIdController.dispose();
-    _reasonController.dispose();
+    _detailsController.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    if (!_confirmed) {
-      LandingActions.showSnackBar(
-        context,
-        'Debes confirmar que solicitas la eliminación permanente de tu cuenta.',
-      );
-      return;
-    }
 
     setState(() => _submitting = true);
 
-    final sent = await ContactFormService.sendDeleteAccountRequest(
+    final sent = await ContactFormService.sendDataRequest(
       name: _nameController.text.trim(),
       email: _emailController.text.trim(),
+      requestType: _requestType.label,
       ciervoId: _ciervoIdController.text.trim(),
-      reason: _reasonController.text.trim(),
+      details: _detailsController.text.trim(),
     );
 
     if (!mounted) return;
@@ -82,58 +87,30 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
     final brand = AppConstants.brandName;
 
     return LegalPageLayout(
-      title: 'Eliminación de cuenta y datos personales',
+      title: 'Solicitud de datos personales',
       onBack: () => context.go('/'),
       children: [
         LegalSection(
           heading: 'Introducción',
           body:
-              'En $brand respetamos tu privacidad y tu derecho al control de tus datos personales.\n\n'
-              'Desde esta página puedes solicitar la eliminación de tu cuenta y de los datos asociados conforme a nuestra Política de Privacidad.',
-        ),
-        LegalSection(
-          heading: '¿Cómo solicitar la eliminación?',
-          body:
-              'Puedes solicitar la eliminación de tu cuenta de $brand de las siguientes formas:\n\n'
-              '1. Completando el formulario en esta página.\n'
-              '2. Desde la aplicación: Configuración > Cuenta > Eliminar cuenta.\n'
-              '3. Enviando un correo a ${AppConstants.dataSafetyEmail} con el asunto "Eliminación de cuenta".\n\n'
-              'Esta página es pública y no requiere iniciar sesión.',
+              'En $brand respetamos tu privacidad y tus derechos sobre tus datos personales.\n\n'
+              'Desde esta página puedes ejercer tus derechos de acceso, rectificación, supresión parcial o eliminación completa de tu cuenta, conforme a nuestra Política de Privacidad.',
         ),
         const LegalSection(
-          heading: '¿Qué sucede al eliminar la cuenta?',
+          heading: 'Tipos de solicitud disponibles',
           body:
-              'Al eliminar tu cuenta de Ciervo Club, se eliminarán de forma permanente, cuando corresponda, los siguientes datos:\n\n'
-              '• Perfil del usuario\n'
-              '• Nombre\n'
-              '• Correo electrónico\n'
-              '• Número telefónico\n'
-              '• Fotografía de perfil\n'
-              '• Preferencias\n'
-              '• Favoritos\n'
-              '• Wallet (si el saldo es cero)\n'
-              '• Historial de notificaciones\n'
-              '• Tokens de autenticación\n'
-              '• Tokens Firebase\n'
-              '• Configuración de la aplicación',
+              'Puedes solicitar:\n\n'
+              '• Copia de tus datos personales.\n'
+              '• Corrección de información incorrecta o desactualizada.\n'
+              '• Eliminación parcial de datos (por ejemplo, historial, preferencias o contenido permitido).\n'
+              '• Eliminación completa de la cuenta.\n\n'
+              'Para eliminación completa de cuenta, también puedes visitar la página dedicada de eliminación de cuenta.',
         ),
         const LegalSection(
-          heading: 'Datos que pueden conservarse',
+          heading: 'Tiempo de procesamiento',
           body:
-              'Ciertos datos pueden conservarse temporalmente únicamente cuando exista obligación legal o contractual. Ejemplos:\n\n'
-              '• Registros financieros\n'
-              '• Historial de transacciones\n'
-              '• Facturación\n'
-              '• Información requerida por autoridades competentes\n'
-              '• Registros antifraude\n'
-              '• Auditorías de seguridad\n\n'
-              'Estos datos únicamente se conservan durante el tiempo exigido por la legislación aplicable.',
-        ),
-        const LegalSection(
-          heading: 'Tiempo de eliminación',
-          body:
-              'La solicitud será procesada en un plazo máximo de 30 días calendario.\n\n'
-              'Normalmente, el proceso se completa en pocos días cuando la verificación de identidad no requiere pasos adicionales.',
+              'Las solicitudes serán procesadas en un plazo máximo de 30 días calendario. '
+              'Normalmente respondemos en pocos días cuando no se requiere verificación adicional de identidad.',
         ),
         const SizedBox(height: AppSpacing.lg),
         if (_submitted)
@@ -179,15 +156,33 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  'Completa el formulario para enviar tu solicitud de eliminación de cuenta en Ciervo Club.',
+                  'Selecciona el tipo de solicitud y completa tus datos.',
                   style: AppTypography.bodySmall(context),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                DropdownButtonFormField<DataRequestType>(
+                  value: _requestType,
+                  decoration: const InputDecoration(
+                    labelText: 'Tipo de solicitud',
+                  ),
+                  items: DataRequestType.values
+                      .map(
+                        (type) => DropdownMenuItem(
+                          value: type,
+                          child: Text(type.label),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() => _requestType = value);
+                    }
+                  },
                 ),
                 const SizedBox(height: AppSpacing.md),
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Nombre',
-                  ),
+                  decoration: const InputDecoration(labelText: 'Nombre'),
                   textInputAction: TextInputAction.next,
                   validator: (v) => v == null || v.isEmpty ? 'Requerido' : null,
                 ),
@@ -215,42 +210,27 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                 ),
                 const SizedBox(height: AppSpacing.md),
                 TextFormField(
-                  controller: _reasonController,
-                  decoration: const InputDecoration(
-                    labelText: 'Motivo (opcional)',
+                  controller: _detailsController,
+                  decoration: InputDecoration(
+                    labelText: _requestType == DataRequestType.partialDeletion
+                        ? 'Datos a eliminar (opcional)'
+                        : 'Detalles adicionales (opcional)',
                   ),
-                  maxLines: 3,
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(height: AppSpacing.md),
-                Semantics(
-                  checked: _confirmed,
-                  child: CheckboxListTile(
-                    value: _confirmed,
-                    onChanged: (value) =>
-                        setState(() => _confirmed = value ?? false),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      'Solicito la eliminación permanente de mi cuenta y entiendo que este proceso puede ser irreversible.',
-                      style: AppTypography.bodySmall(context),
-                    ),
-                    activeColor: AppColors.gold,
-                    checkColor: AppColors.primaryBlack,
-                  ),
+                  maxLines: 4,
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 PrimaryButton(
-                  label: 'Solicitar eliminación',
+                  label: 'Enviar solicitud',
                   onPressed: _submitting ? null : _submit,
                   isLoading: _submitting,
                   isExpanded: true,
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                TextButton(
-                  onPressed: () => context.go(UrlConstants.dataRequest),
-                  child: const Text('¿Necesitas otra solicitud sobre tus datos?'),
-                ),
+                if (_requestType == DataRequestType.fullDeletion)
+                  TextButton(
+                    onPressed: () => context.go(UrlConstants.deleteAccount),
+                    child: const Text('Ir a la página de eliminación de cuenta'),
+                  ),
               ],
             ),
           ),

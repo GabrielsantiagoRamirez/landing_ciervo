@@ -3,6 +3,7 @@ Allow: /
 Allow: /privacy
 Allow: /terms
 Allow: /delete-account
+Allow: /data-request
 Allow: /support
 
 Disallow: /assets/

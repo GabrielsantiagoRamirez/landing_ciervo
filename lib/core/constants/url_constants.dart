@@ -11,6 +11,7 @@ abstract final class UrlConstants {
   static const String privacy = '/privacy';
   static const String terms = '/terms';
   static const String deleteAccount = '/delete-account';
+  static const String dataRequest = '/data-request';
   static const String support = '/support';
   static const String home = '/';
 

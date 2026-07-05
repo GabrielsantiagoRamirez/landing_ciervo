@@ -9,6 +9,9 @@ abstract final class AppConstants {
   static const String siteUrl = 'https://ciervo.app';
   static const String supportEmail = 'soporte@ciervo.app';
   static const String contactEmail = 'contacto@ciervo.app';
+
+  /// Destino temporal para solicitudes de privacidad hasta disponer de endpoint API.
+  static const String dataSafetyEmail = 'gabrielsabtiago716@gmail.com';
   static const String whatsappNumber = '';
 
   /// Razón social del operador de la plataforma.

@@ -14,9 +14,13 @@ abstract final class SeoConstants {
   static const String termsDescription =
       'Lee los términos y condiciones de uso de la plataforma Ciervo Club.';
 
-  static const String deleteAccountTitle = 'Eliminar Cuenta | Ciervo Club';
+  static const String deleteAccountTitle = 'Eliminar cuenta | Ciervo Club';
   static const String deleteAccountDescription =
-      'Solicita la eliminación de tu cuenta de Ciervo Club y conoce qué datos se eliminan o conservan.';
+      'Solicita la eliminación de tu cuenta y de tus datos personales de Ciervo Club.';
+
+  static const String dataRequestTitle = 'Solicitud de datos | Ciervo Club';
+  static const String dataRequestDescription =
+      'Solicita una copia, corrección o eliminación parcial de tus datos personales en Ciervo Club.';
 
   static const String supportTitle = 'Soporte | Ciervo Club';
   static const String supportDescription =

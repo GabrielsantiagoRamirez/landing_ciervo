@@ -5,7 +5,6 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/services/seo_service.dart';
 import '../../../shared/layout/legal_page_layout.dart';
 import '../../../shared/widgets/email_link.dart';
-import '../../../shared/widgets/legal_internal_links.dart';
 
 class PrivacyPage extends StatefulWidget {
   const PrivacyPage({super.key});
@@ -175,7 +174,6 @@ class _PrivacyPageState extends State<PrivacyPage> {
             ],
           ),
         ),
-        const LegalInternalLinks(),
       ],
     );
   }

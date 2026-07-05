@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../../features/data_request/pages/data_request_page.dart';
 import '../../features/delete_account/pages/delete_account_page.dart';
 import '../../features/home/pages/home_page.dart';
 import '../../features/not_found/pages/not_found_page.dart';
@@ -26,6 +27,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/delete-account',
       builder: (context, state) => const DeleteAccountPage(),
+    ),
+    GoRoute(
+      path: '/data-request',
+      builder: (context, state) => const DataRequestPage(),
     ),
     GoRoute(
       path: '/support',
