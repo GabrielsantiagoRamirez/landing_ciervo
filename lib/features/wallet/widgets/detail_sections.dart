@@ -16,6 +16,7 @@ class FeatureDetailSection extends StatelessWidget {
     required this.title,
     required this.description,
     required this.icon,
+    required this.imagePath,
     this.reversed = false,
     this.sectionKey,
   });
@@ -23,6 +24,7 @@ class FeatureDetailSection extends StatelessWidget {
   final String title;
   final String description;
   final IconData icon;
+  final String imagePath;
   final bool reversed;
   final String? sectionKey;
 
@@ -50,7 +52,10 @@ class FeatureDetailSection extends StatelessWidget {
       ],
     );
 
-    final mockup = const PhoneMockup();
+    final mockup = PhoneMockup(
+      imagePath: imagePath,
+      label: title,
+    );
 
     return ResponsiveContainer(
       child: AnimatedSection(
@@ -73,6 +78,8 @@ class FeatureDetailSection extends StatelessWidget {
   }
 }
 
+
+
 class WalletSection extends StatelessWidget {
   const WalletSection({super.key});
   @override
@@ -80,6 +87,7 @@ class WalletSection extends StatelessWidget {
         title: ContentConstants.walletTitle,
         description: ContentConstants.walletDescription,
         icon: Icons.account_balance_wallet_outlined,
+        imagePath: 'assets/images/wallet.png',
       );
 }
 
@@ -91,6 +99,7 @@ class DeliverySection extends StatelessWidget {
         description: ContentConstants.deliveryDescription,
         icon: Icons.delivery_dining_outlined,
         reversed: true,
+        imagePath: 'assets/images/delivery.png',
       );
 }
 
@@ -101,6 +110,7 @@ class EventsSection extends StatelessWidget {
         title: ContentConstants.eventsTitle,
         description: ContentConstants.eventsDescription,
         icon: Icons.event_outlined,
+        imagePath: 'assets/images/reserva.png',
       );
 }
 
@@ -112,6 +122,7 @@ class ReservationsSection extends StatelessWidget {
         description: ContentConstants.reservationsDescription,
         icon: Icons.calendar_month_outlined,
         reversed: true,
+        imagePath: 'assets/images/mis_reservas.png',
       );
 }
 
@@ -122,6 +133,7 @@ class PromotionsSection extends StatelessWidget {
         title: ContentConstants.promotionsTitle,
         description: ContentConstants.promotionsDescription,
         icon: Icons.local_offer_outlined,
+        imagePath: 'assets/images/beneficios.png',
       );
 }
 
@@ -133,6 +145,7 @@ class FamilySection extends StatelessWidget {
         description: ContentConstants.familyDescription,
         icon: Icons.family_restroom_outlined,
         reversed: true,
+        imagePath: 'assets/images/familia.png',
       );
 }
 
@@ -143,6 +156,7 @@ class KidsSection extends StatelessWidget {
         title: ContentConstants.kidsTitle,
         description: ContentConstants.kidsDescription,
         icon: Icons.child_care_outlined,
+        imagePath: 'assets/images/kids.png',
       );
 }
 

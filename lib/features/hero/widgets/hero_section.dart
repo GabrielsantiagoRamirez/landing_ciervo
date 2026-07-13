@@ -36,7 +36,9 @@ class HeroSection extends StatelessWidget {
                 children: [
                   _buildContent(context, isMobile, isTablet),
                   const SizedBox(height: AppSpacing.xxl),
-                  const PhoneMockup(),
+                  const PhoneMockup(
+                    imagePath: 'assets/images/search.png',
+                  ),
                 ],
               )
             : Row(
@@ -44,7 +46,9 @@ class HeroSection extends StatelessWidget {
                 children: [
                   Expanded(child: _buildContent(context, isMobile, isTablet)),
                   const SizedBox(width: AppSpacing.xxxl),
-                  const PhoneMockup(),
+                  const PhoneMockup(
+                    imagePath: 'assets/images/search.png',
+                  ),
                 ],
               ),
       ),

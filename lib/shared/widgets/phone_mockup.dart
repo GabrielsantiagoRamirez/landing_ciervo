@@ -17,30 +17,16 @@ class PhoneMockup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: AppShadows.phone,
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Container(
-        width: 280,
-        height: 560,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(40),
-          border: Border.all(color: AppColors.divider, width: 2),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(32),
-          child: imagePath != null
-              ? Image.asset(
-                  imagePath!,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => _placeholder(context),
-                )
-              : _placeholder(context),
-        ),
+    return SizedBox(
+      width: 280,
+      height: 560,
+      child: ClipRRect(
+        child: imagePath != null
+            ? Image.asset(
+                imagePath!,
+                fit: BoxFit.contain,
+              )
+            : _placeholder(context),
       ),
     );
   }

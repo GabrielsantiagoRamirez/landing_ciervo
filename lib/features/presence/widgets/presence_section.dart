@@ -78,28 +78,27 @@ class CountryFlag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final normalizedCode = code.toLowerCase();
+
     return Semantics(
       label: 'Bandera de ${_countryName(code)}',
-      child: Container(
+      child: SizedBox(
         width: width,
         height: height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: AppColors.divider),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.primaryBlack.withValues(alpha: 0.35),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
+        child: Image.asset(
+          'assets/flags/$normalizedCode.png',
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return ColoredBox(
+              color: Colors.transparent,
+              child: const Center(
+                child: Icon(Icons.flag_outlined),
+              ),
+            );
+          },
         ),
-        clipBehavior: Clip.antiAlias,
-        child: switch (code.toUpperCase()) {
-          'CL' => const _ChileFlag(),
-          'CO' => const _ColombiaFlag(),
-          _ => ColoredBox(color: AppColors.surface),
-        },
       ),
     );
   }
@@ -109,88 +108,4 @@ class CountryFlag extends StatelessWidget {
         'CO' => 'Colombia',
         _ => code,
       };
-}
-
-class _ChileFlag extends StatelessWidget {
-  const _ChileFlag();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        const Column(
-          children: [
-            Expanded(child: ColoredBox(color: Colors.white)),
-            Expanded(child: ColoredBox(color: Color(0xFFD52B1E))),
-          ],
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: FractionallySizedBox(
-            widthFactor: 1 / 3,
-            heightFactor: 0.5,
-            child: ColoredBox(
-              color: const Color(0xFF0039A6),
-              child: Center(
-                child: CustomPaint(
-                  size: const Size(14, 14),
-                  painter: _StarPainter(color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ColombiaFlag extends StatelessWidget {
-  const _ColombiaFlag();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Expanded(flex: 2, child: ColoredBox(color: Color(0xFFFCD116))),
-        Expanded(child: ColoredBox(color: Color(0xFF003893))),
-        Expanded(child: ColoredBox(color: Color(0xFFCE1126))),
-      ],
-    );
-  }
-}
-
-class _StarPainter extends CustomPainter {
-  _StarPainter({required this.color});
-
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = color;
-    final path = Path();
-    final cx = size.width / 2;
-    final cy = size.height / 2;
-    final outer = size.width / 2;
-    final inner = outer * 0.4;
-
-    for (var i = 0; i < 10; i++) {
-      final radius = i.isEven ? outer : inner;
-      final angle = -math.pi / 2 + (i * math.pi / 5);
-      final x = cx + radius * math.cos(angle);
-      final y = cy + radius * math.sin(angle);
-      if (i == 0) {
-        path.moveTo(x, y);
-      } else {
-        path.lineTo(x, y);
-      }
-    }
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _StarPainter oldDelegate) =>
-      oldDelegate.color != color;
 }
