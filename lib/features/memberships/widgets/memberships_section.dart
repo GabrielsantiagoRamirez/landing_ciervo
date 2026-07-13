@@ -149,7 +149,7 @@ class BusinessSection extends StatelessWidget {
               child: PrimaryButton(
                 label: ContentConstants.registerBusinessButton,
                 onPressed: onRegisterBusiness,
-                tooltip: 'Ir a registro de negocio',
+                tooltip: 'Ir al panel de comercios',
               ),
             ),
           ],

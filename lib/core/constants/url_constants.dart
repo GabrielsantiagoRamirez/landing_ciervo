@@ -3,7 +3,7 @@ abstract final class UrlConstants {
   static const String googlePlayUrl = '';
   /// Completar cuando la app esté en App Store.
   static const String appStoreUrl = '';
-  static const String businessPanelUrl = '';
+  static const String businessPanelUrl = 'https://admin.ciervo.club/login';
   static const String contactEmail = 'contacto@ciervo.app';
   static const String whatsappUrl = '';
   static const String supportUrl = '/support';

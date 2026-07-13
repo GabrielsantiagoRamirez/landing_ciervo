@@ -36,37 +36,68 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     final button = MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
+      cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
       child: AnimatedScale(
-        scale: _hovered && enabled ? 1.03 : 1.0,
-        duration: const Duration(milliseconds: 200),
+        scale: _hovered && enabled ? 1.015 : 1.0,
+        duration: const Duration(milliseconds: 180),
         curve: Curves.easeOut,
-        child: Material(
-          color: enabled ? color : AppColors.textDisabled,
-          borderRadius: BorderRadius.circular(AppRadius.button),
-          child: InkWell(
-            onTap: enabled ? widget.onPressed : null,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppRadius.button),
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg,
-                vertical: AppSpacing.sm,
-              ),
-              alignment: Alignment.center,
-              child: widget.isLoading
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: AppColors.primaryBlack,
-                      ),
-                    )
-                  : Text(
-                      widget.label,
-                      style: AppTypography.button(context).copyWith(
-                        color: AppColors.primaryBlack,
-                      ),
+            gradient: enabled
+                ? LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      color,
+                      Color.lerp(color, AppColors.goldDark, 0.35)!,
+                    ],
+                  )
+                : null,
+            color: enabled ? null : AppColors.textDisabled,
+            boxShadow: enabled
+                ? [
+                    BoxShadow(
+                      color: AppColors.gold.withValues(alpha: _hovered ? 0.28 : 0.16),
+                      blurRadius: _hovered ? 16 : 10,
+                      offset: const Offset(0, 4),
                     ),
+                  ]
+                : null,
+          ),
+          child: Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(AppRadius.button),
+            child: InkWell(
+              onTap: enabled ? widget.onPressed : null,
+              borderRadius: BorderRadius.circular(AppRadius.button),
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: 12,
+                ),
+                child: widget.isLoading
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.primaryBlack,
+                        ),
+                      )
+                    : Text(
+                        widget.label,
+                        style: AppTypography.button(context).copyWith(
+                          color: AppColors.primaryBlack,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.2,
+                        ),
+                      ),
+              ),
             ),
           ),
         ),
@@ -77,14 +108,20 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         ? SizedBox(width: double.infinity, child: button)
         : button;
 
-    return Semantics(
+    final semantics = Semantics(
       button: true,
       label: widget.label,
       enabled: enabled,
-      child: Tooltip(
-        message: widget.tooltip ?? widget.label,
-        child: child,
-      ),
+      child: child,
+    );
+
+    if (widget.tooltip == null || widget.tooltip == widget.label) {
+      return semantics;
+    }
+
+    return Tooltip(
+      message: widget.tooltip!,
+      child: semantics,
     );
   }
 }

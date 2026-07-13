@@ -52,12 +52,14 @@ class _SecondaryButtonState extends State<SecondaryButton> {
             borderRadius: BorderRadius.circular(AppRadius.button),
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg,
-                vertical: AppSpacing.sm,
+                horizontal: AppSpacing.md,
+                vertical: 12,
               ),
               child: Text(
                 widget.label,
                 style: AppTypography.button(context).copyWith(
+                  fontSize: 15,
+                  letterSpacing: 0.2,
                   color: filled
                       ? AppColors.primaryBlack
                       : (enabled ? AppColors.gold : AppColors.textDisabled),

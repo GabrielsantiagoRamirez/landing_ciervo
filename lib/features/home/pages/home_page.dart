@@ -12,6 +12,7 @@ import '../../features/widgets/features_sections.dart';
 import '../../footer/widgets/footer_section.dart';
 import '../../hero/widgets/hero_section.dart';
 import '../../memberships/widgets/memberships_section.dart';
+import '../../presence/widgets/presence_section.dart';
 import '../../wallet/widgets/detail_sections.dart';
 import '../../../shared/widgets/glass_navbar.dart';
 
@@ -116,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SliverToBoxAdapter(child: StatsSection()),
+              const SliverToBoxAdapter(child: PresenceSection()),
               const SliverToBoxAdapter(child: AboutSection()),
               SliverToBoxAdapter(
                 child: KeyedSubtree(

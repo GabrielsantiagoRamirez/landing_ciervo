@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/content_constants.dart';
+import '../../../core/services/landing_actions.dart';
 import '../../../core/theme/app_breakpoints.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../shared/buttons/primary_button.dart';
@@ -88,7 +90,48 @@ class HeroSection extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: AppSpacing.md),
+          _MerchantLoginLink(centered: isMobile),
         ],
+      ),
+    );
+  }
+}
+
+class _MerchantLoginLink extends StatefulWidget {
+  const _MerchantLoginLink({required this.centered});
+
+  final bool centered;
+
+  @override
+  State<_MerchantLoginLink> createState() => _MerchantLoginLinkState();
+}
+
+class _MerchantLoginLinkState extends State<_MerchantLoginLink> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: widget.centered ? Alignment.center : Alignment.centerLeft,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () => LandingActions.openBusinessPanel(context),
+          child: Text(
+            ContentConstants.merchantLoginCta,
+            textAlign: widget.centered ? TextAlign.center : TextAlign.start,
+            style: AppTypography.bodySmall(context).copyWith(
+              fontSize: 14,
+              color: _hovered ? AppColors.gold : AppColors.textSecondary,
+              decoration: TextDecoration.underline,
+              decorationColor:
+                  _hovered ? AppColors.gold : AppColors.textSecondary,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -4,8 +4,18 @@ abstract final class ContentConstants {
       'Descubre, reserva, compra y disfruta desde una sola aplicación.';
   static const String heroSubtitle =
       'Ciervo Club conecta personas, negocios y experiencias en una única plataforma. Descubre restaurantes, hoteles, eventos, promociones, domicilios y mucho más, todo desde una experiencia moderna, rápida y segura.';
-  static const String heroPrimaryCta = 'Descargar la App';
+  static const String heroPrimaryCta = 'Reservar App';
   static const String heroSecondaryCta = 'Explorar funcionalidades';
+  static const String merchantLoginCta = '¿Eres un comercio? Ingresa por aquí';
+
+  // Presence
+  static const String presenceTitle = 'Disponible en Chile y Colombia';
+  static const String presenceSubtitle =
+      'Ciervo Club ya está presente en dos países, conectando personas y negocios en la región.';
+  static const List<CountryPresence> presenceCountries = [
+    CountryPresence(name: 'Chile', code: 'CL'),
+    CountryPresence(name: 'Colombia', code: 'CO'),
+  ];
 
   // Stats
   static const List<StatItem> stats = [
@@ -170,7 +180,8 @@ abstract final class ContentConstants {
     ),
     FaqItem(
       question: '¿Cómo puedo registrar mi negocio?',
-      answer: 'Desde la sección de negocios o contactando al equipo.',
+      answer:
+          'Si eres un comercio, ingresa al panel administrativo desde el enlace de la página o contacta al equipo para registrarte.',
     ),
     FaqItem(
       question: '¿Qué métodos de pago existen?',
@@ -222,7 +233,14 @@ abstract final class ContentConstants {
     NavItem(label: 'FAQ', sectionKey: 'faq'),
     NavItem(label: 'Contacto', sectionKey: 'contact'),
   ];
-  static const String navDownload = 'Descargar App';
+  static const String navDownload = 'Reservar App';
+}
+
+class CountryPresence {
+  const CountryPresence({required this.name, required this.code});
+
+  final String name;
+  final String code;
 }
 
 enum MembershipCategory { consumer, business, enterprise }
