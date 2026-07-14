@@ -4,7 +4,7 @@ abstract final class UrlConstants {
   /// Completar cuando la app esté en App Store.
   static const String appStoreUrl = '';
   static const String businessPanelUrl = 'https://admin.ciervo.club/login';
-  static const String contactEmail = 'contacto@ciervo.app';
+  static const String contactEmail = 'gabrielsabtiago716@gmail.com';
   static const String whatsappUrl = '';
   static const String supportUrl = '/support';
 

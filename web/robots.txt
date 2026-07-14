@@ -9,4 +9,4 @@ Allow: /support
 Disallow: /assets/
 Disallow: /canvaskit/
 
-Sitemap: https://ciervo.app/sitemap.xml
+Sitemap: https://ciervo.club/sitemap.xml

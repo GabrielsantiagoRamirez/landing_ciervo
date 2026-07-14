@@ -6,9 +6,9 @@ abstract final class AppConstants {
   static const String brandName = 'Ciervo Club';
 
   static const String logoPath = 'assets/logos/icon_sin_fondo.png';
-  static const String siteUrl = 'https://ciervo.app';
-  static const String supportEmail = 'soporte@ciervo.app';
-  static const String contactEmail = 'contacto@ciervo.app';
+  static const String siteUrl = 'https://ciervo.club';
+  static const String supportEmail = 'gabrielsabtiago716@gmail.com';
+  static const String contactEmail = 'gabrielsabtiago716@gmail.com';
 
   /// Destino temporal para solicitudes de privacidad hasta disponer de endpoint API.
   static const String dataSafetyEmail = 'gabrielsabtiago716@gmail.com';

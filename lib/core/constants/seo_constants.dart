@@ -30,5 +30,5 @@ abstract final class SeoConstants {
   static const String notFoundDescription =
       'La página que buscas no existe en Ciervo Club.';
 
-  static const String ogImage = 'https://ciervo.app/og-image.png';
+  static const String ogImage = 'https://ciervo.club/og-image.png';
 }
